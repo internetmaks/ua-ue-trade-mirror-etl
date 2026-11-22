@@ -6,7 +6,7 @@ Path("logs").mkdir(exist_ok=True)
 
 logger.remove()
 
-#logowanie w konsoli
+# logowanie w konsoli
 logger.add(
     sys.stderr,
     level="INFO",
@@ -17,7 +17,7 @@ logger.add(
     diagnose=True,
 )
 
-#logowanie w pliku
+# logowanie w pliku
 logger.add(
     "logs/pytest.log",
     level="DEBUG",
