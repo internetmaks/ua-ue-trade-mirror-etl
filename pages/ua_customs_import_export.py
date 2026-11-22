@@ -20,12 +20,13 @@ class UA_customs_Page:
 
         self.search_filter_region = page.get_by_role("region", name="Фильтр результатов поиска")#nie przetłumaczony ARIA
         self.search_input = page.get_by_test_id("search-input-field")
+        self.confirm_button = page.get_by_test_id("actions-toolbar-confirm")
         self.download_button = page.get_by_role("button", name="Download")
     #akcje
     def open(self):
         logger.info(f"Otwieram stronę: {self.URL}")
         self.page.goto(self.URL)
-        expect(self.main_table,timeout=self.DEFAULT_TIMEOUTS_MS).to_be_visible()
+        expect(self.main_table).to_be_visible(timeout=self.DEFAULT_TIMEOUTS_MS)
         logger.success("Strona załadowana")
 
     def select_year(self, year: str | int):
@@ -47,16 +48,17 @@ class UA_customs_Page:
     def _select_from_filter(self, filter_locator: Locator, value: str):
         logger.debug(f"Otwieram filtr {filter_locator} i wpisuję: {value}")
         filter_locator.click()
-        expect(self.search_filter_region,timeout=self.DEFAULT_TIMEOUTS_MS).to_be_visible()
+        expect(self.search_filter_region).to_be_visible(timeout=self.DEFAULT_TIMEOUTS_MS)
         self.search_input.click()
         self.search_input.fill(value)
     
         matching_row = self.search_filter_region.get_by_role(
             "row", name=re.compile(re.escape(value), re.IGNORECASE)).first
-        expect(matching_row,timeout=self.DEFAULT_TIMEOUTS_MS).to_be_visible()
+        expect(matching_row).to_be_visible(timeout=self.DEFAULT_TIMEOUTS_MS)
     
         self.search_input.press("Enter")
-        expect(self.main_table,timeout=self.DEFAULT_TIMEOUTS_MS).to_be_visible()
+        self.confirm_button.click()
+        expect(self.main_table).to_be_visible(timeout=self.DEFAULT_TIMEOUTS_MS)
         logger.debug(f"Zatwierdzono wartość filtra {filter_locator}: {value}")
 
     def download(self, folder: str = "downloads") -> Path:
