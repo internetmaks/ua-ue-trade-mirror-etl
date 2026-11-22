@@ -10,6 +10,6 @@ def test_example(page: Page) -> None:
     UAcustoms.open()
     UAcustoms.select_year("2025")
     UAcustoms.select_currency("usd")
-    UAcustoms.select_country("poland")
+    UAcustoms.select_region("eu")
     UAcustoms.select_hs_chapter("1001")
     UAcustoms.download()

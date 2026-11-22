@@ -15,7 +15,7 @@ class UA_customs_Page:
         self.main_table = page.get_by_role("application", name="Таблиця \xa0 Country") #nie przetłumaczony ARIA
         self.Year = page.get_by_test_id("collapsed-title-Year").locator("div").filter(has_text=re.compile(r"^Year$"))
         self.Currency = page.get_by_test_id("collapsed-title-Currency").locator("div").filter(has_text=re.compile(r"^Currency$"))
-        self.Country = page.get_by_test_id("collapsed-title-Country").locator("div").filter(has_text=re.compile(r"^Country$"))
+        self.Region = page.get_by_test_id("collapsed-title-Region").locator("div").filter(has_text=re.compile(r"^Region$"))
         self.HS_Chapter = page.get_by_test_id("collapsed-title-HS Chapter").locator("div").filter(has_text=re.compile(r"^HS Chapter$"))
 
         self.search_filter_region = page.get_by_role("region", name="Фильтр результатов поиска")#nie przetłumaczony ARIA
@@ -37,9 +37,9 @@ class UA_customs_Page:
         logger.info(f"Wybieram walutę: {currency}")
         self._select_from_filter(self.Currency, str(currency))
 
-    def select_country(self, country: str):
-        logger.info(f"Wybieram kraj: {country}")
-        self._select_from_filter(self.Country, country)
+    def select_region(self, region: str):
+        logger.info(f"Wybieram kraj: {region}")
+        self._select_from_filter(self.Region, region)
 
     def select_hs_chapter(self, hs_chapter: str):
         logger.info(f"Wybieram HS Chapter: {hs_chapter}")
