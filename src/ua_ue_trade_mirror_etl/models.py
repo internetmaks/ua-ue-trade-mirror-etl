@@ -4,6 +4,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 class UAcustomsRecord(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True, frozen=True)
 
+    source_system: str = "ua_customs"
     partner_iso2: str = Field(min_length=2, max_length=2)
     partner_name: str = Field(min_length=1)
     year: int = Field(ge=2000, le=2100)
@@ -22,14 +23,13 @@ class UAcustomsRecord(BaseModel):
         return self
 
 
-class MirrorTradeRecord(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, frozen=True)
+class EurostatTradeRecord(BaseModel):
+    model_config=ConfigDict(str_strip_whitespace=True, frozen=True)
 
-    partner_iso2: str = Field(min_length=2, max_length=2)
-    partner_name: str = Field(min_length=1)
-    year: int = Field(ge=2000, le=2100)
-    hs_chapter: str = Field(min_length=2, max_length=10)
-    ua_export_usd: float = Field(ge=0)
-    eu_import_usd: float = Field(ge=0)
-    mirror_gap_usd: float
-    is_anomaly: bool = False
+    source_system: str = "eurostat_comext"
+    reporter_iso2: str = Field(min_length=2,max_length=2)
+    year: int = Field(ge=2000,le=2100)
+    hs_chapter: str=Field(min_length=2,max_length=10)
+    data_status: str="provisional"
+    export_usd: float = Field(ge=0)
+    import_usd: float = Field(ge=0)

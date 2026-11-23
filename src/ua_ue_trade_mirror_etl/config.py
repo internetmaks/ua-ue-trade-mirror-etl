@@ -16,7 +16,7 @@ class Settings(BaseModel):
     target_region: str = Field(default=os.getenv("TARGET_REGION", "eu"))
     target_hs_chapter: str = Field(default=os.getenv("TARGET_HS_CHAPTER", "1001"))
     eu_countries: list[str] = Field(
-        default_factory=lambda: _parse_csv_env("EU_COUNTRIES", "PL,DE,RO,HU,SK,ES,IT,NL")
+        default_factory=lambda: _parse_csv_env("EU_COUNTRIES", "PL,DE,RO,HU,SK,ES,IT,NL,FR")
     )
 
     # Źródła danych i limity czasu
