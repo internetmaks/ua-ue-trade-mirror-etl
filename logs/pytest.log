@@ -8,3 +8,4 @@
 2026-11-23 18:55:19 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:24 - Pominięto 2 wierszy bez kodu ISO: ['  Unspecified', '-']
 2026-11-23 18:55:19 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:54 - Zwalidowano 247 rekordów z data/raw/a6db4928-ac62-4dfc-8cdf-f880414a7b5a.xlsx
 2026-11-23 19:39:46 | INFO     | ua_ue_trade_mirror_etl.transform.reconciler:reconcile_trade_mirror:37 - Zestawiono 1 krajów, zgodnych w obie strony: 0
+2026-11-23 20:10:10 | SUCCESS  | ua_ue_trade_mirror_etl.storage:df_to_csv:20 - zapisano df do /tmp/tmpzvm25d22/anomalies.csv
