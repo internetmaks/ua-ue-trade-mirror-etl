@@ -1,0 +1,9 @@
+2026-11-22 23:32:17 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:9 - Parsuje plik Excel: tests/fixtures/sample_ua_customs.xlsx (year=2025, hs_chapter=1001)
+2026-11-22 23:32:29 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:9 - Parsuje plik Excel: data/raw/a6db4928-ac62-4dfc-8cdf-f880414a7b5a.xlsx (year=2025, hs_chapter=1001)
+2026-11-22 23:32:29 | DEBUG    | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:11 - Wczytano 249 wierszy
+2026-11-22 23:32:29 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:19 - Pominięto 2 wierszy bez kodu ISO: ['  Unspecified', '-']
+2026-11-22 23:32:29 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:49 - Zwalidowano 247 rekordów z data/raw/a6db4928-ac62-4dfc-8cdf-f880414a7b5a.xlsx
+2026-11-23 18:55:18 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:14 - Parsuje plik Excel: data/raw/a6db4928-ac62-4dfc-8cdf-f880414a7b5a.xlsx (year=2025, hs_chapter=1001)
+2026-11-23 18:55:19 | DEBUG    | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:16 - Wczytano 249 wierszy
+2026-11-23 18:55:19 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:24 - Pominięto 2 wierszy bez kodu ISO: ['  Unspecified', '-']
+2026-11-23 18:55:19 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:54 - Zwalidowano 247 rekordów z data/raw/a6db4928-ac62-4dfc-8cdf-f880414a7b5a.xlsx

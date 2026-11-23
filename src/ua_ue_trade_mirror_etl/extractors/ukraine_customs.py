@@ -1,13 +1,14 @@
 from pathlib import Path
 import re
 from playwright.sync_api import Locator, Page, expect
+from ua_ue_trade_mirror_etl.config import settings
 from ua_ue_trade_mirror_etl.logger import logger
 
 
 class UA_customs_Page:
-    URL = "https://bi.customs.gov.ua/en/trade/import-export"
-    DEFAULT_TIMEOUTS_MS = 20000
-    DOWNLOAD_TIMEOUT_MS = 60000
+    URL = settings.ua_customs_url
+    DEFAULT_TIMEOUTS_MS = settings.default_timeout_ms
+    DOWNLOAD_TIMEOUT_MS = settings.download_timeout_ms
     # lokalizatory
     def __init__(self, page: Page):
         self.page = page
@@ -62,7 +63,7 @@ class UA_customs_Page:
         expect(self.main_table).to_be_visible(timeout=self.DEFAULT_TIMEOUTS_MS)
         logger.debug(f"Zatwierdzono wartość filtra {filter_locator}: {value}")
 
-    def download(self, folder: str = "data/raw") -> Path:
+    def download(self, folder: str | Path = settings.raw_dir) -> Path:
         logger.info("pobieram dane")
         Path(folder).mkdir(parents=True, exist_ok=True)
         with self.page.expect_download(timeout=self.DOWNLOAD_TIMEOUT_MS) as download_info:

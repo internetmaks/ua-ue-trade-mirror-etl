@@ -1,11 +1,16 @@
 from pathlib import Path
 import pandas as pd
 from pydantic import ValidationError
+from ua_ue_trade_mirror_etl.config import settings
 from ua_ue_trade_mirror_etl.logger import logger
 from ua_ue_trade_mirror_etl.models import UAcustomsRecord
 
 
-def parse_ua_customs_excel(file_path: Path | str, year: int, hs_chapter: str) -> pd.DataFrame:
+def parse_ua_customs_excel(
+    file_path: Path | str,
+    year: int = settings.target_year,
+    hs_chapter: str = settings.target_hs_chapter,
+) -> pd.DataFrame:
     logger.info(f"Parsuje plik Excel: {file_path} (year={year}, hs_chapter={hs_chapter})")
     df = pd.read_excel(file_path, engine="openpyxl")
     logger.debug(f"Wczytano {len(df)} wierszy")

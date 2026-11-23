@@ -1,8 +1,8 @@
 import sys
-from pathlib import Path
 from loguru import logger
+from ua_ue_trade_mirror_etl.config import settings
 
-Path("logs").mkdir(exist_ok=True)
+settings.log_file.parent.mkdir(parents=True, exist_ok=True)
 
 logger.remove()
 
@@ -19,7 +19,7 @@ logger.add(
 
 # logowanie w pliku
 logger.add(
-    "logs/pytest.log",
+    str(settings.log_file),
     level="DEBUG",
     rotation="10 MB",
     retention="2 days",
