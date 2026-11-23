@@ -29,7 +29,7 @@ class Settings(BaseModel):
             "https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/ds-045409",
         )
     )
-    headless: bool = Field(default=os.getenv("HEADLESS", "true").lower() == "true")
+    headless: bool = Field(default=os.getenv("HEADLESS", "false").lower() == "true")
     default_timeout_ms: int = Field(default=int(os.getenv("DEFAULT_TIMEOUT_MS", "20000")))
     download_timeout_ms: int = Field(default=int(os.getenv("DOWNLOAD_TIMEOUT_MS", "60000")))
 

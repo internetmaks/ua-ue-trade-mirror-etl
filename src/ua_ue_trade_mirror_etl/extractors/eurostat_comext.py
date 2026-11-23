@@ -27,11 +27,11 @@ class EurostatComextClient:
     ) -> EurostatTradeRecord:
         #import i expott
         sdmx_key = f"M.{reporter_iso2.upper()}.UA.{hs_chapter}.1+2.VALUE_IN_EUROS"
-        url = f"{self.BASE_URL}/{sdmx_key}"
+        url = f"{self.BASE_URL}/{sdmx_key}/"
         params = {
             "startPeriod": f"{year}-01",
             "endPeriod": f"{year}-12",
-            "format": "SDMX-CSV",
+            "format": "sdmx-csv",
         }
 
         logger.info(f"Querying Eurostat Comext: {url} ({params['startPeriod']}..{params['endPeriod']})")

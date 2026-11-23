@@ -9,3 +9,103 @@
 2026-11-23 18:55:19 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:54 - Zwalidowano 247 rekordów z data/raw/a6db4928-ac62-4dfc-8cdf-f880414a7b5a.xlsx
 2026-11-23 19:39:46 | INFO     | ua_ue_trade_mirror_etl.transform.reconciler:reconcile_trade_mirror:37 - Zestawiono 1 krajów, zgodnych w obie strony: 0
 2026-11-23 20:10:10 | SUCCESS  | ua_ue_trade_mirror_etl.storage:df_to_csv:20 - zapisano df do /tmp/tmpzvm25d22/anomalies.csv
+2026-11-23 20:29:54 | INFO     | __main__:run_pipeline:33 - Startuje pipeline UA-UE trade mirror ETL
+2026-11-23 20:29:55 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:open:28 - Otwieram stronę: https://bi.customs.gov.ua/en/trade/import-export
+2026-11-23 20:30:05 | SUCCESS  | ua_ue_trade_mirror_etl.extractors.ukraine_customs:open:31 - Strona załadowana
+2026-11-23 20:30:05 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:select_year:34 - Wybieram rok: 2025
+2026-11-23 20:30:05 | DEBUG    | ua_ue_trade_mirror_etl.extractors.ukraine_customs:_select_from_filter:50 - Otwieram filtr <Locator frame=<Frame name= url='https://bi.customs.gov.ua/en/trade/import-export'> selector='internal:testid=[data-testid="collapsed-title-Year"s] >> div >> internal:has-text=/^Year$/'> i wpisuję: 2025
+2026-11-23 20:30:07 | DEBUG    | ua_ue_trade_mirror_etl.extractors.ukraine_customs:_select_from_filter:64 - Zatwierdzono wartość filtra <Locator frame=<Frame name= url='https://bi.customs.gov.ua/en/trade/import-export'> selector='internal:testid=[data-testid="collapsed-title-Year"s] >> div >> internal:has-text=/^Year$/'>: 2025
+2026-11-23 20:30:07 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:select_currency:38 - Wybieram walutę: usd
+2026-11-23 20:30:07 | DEBUG    | ua_ue_trade_mirror_etl.extractors.ukraine_customs:_select_from_filter:50 - Otwieram filtr <Locator frame=<Frame name= url='https://bi.customs.gov.ua/en/trade/import-export'> selector='internal:testid=[data-testid="collapsed-title-Currency"s] >> div >> internal:has-text=/^Currency$/'> i wpisuję: usd
+2026-11-23 20:30:08 | DEBUG    | ua_ue_trade_mirror_etl.extractors.ukraine_customs:_select_from_filter:64 - Zatwierdzono wartość filtra <Locator frame=<Frame name= url='https://bi.customs.gov.ua/en/trade/import-export'> selector='internal:testid=[data-testid="collapsed-title-Currency"s] >> div >> internal:has-text=/^Currency$/'>: usd
+2026-11-23 20:30:08 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:select_region:42 - Wybieram kraj: eu
+2026-11-23 20:30:08 | DEBUG    | ua_ue_trade_mirror_etl.extractors.ukraine_customs:_select_from_filter:50 - Otwieram filtr <Locator frame=<Frame name= url='https://bi.customs.gov.ua/en/trade/import-export'> selector='internal:testid=[data-testid="collapsed-title-Region"s] >> div >> internal:has-text=/^Region$/'> i wpisuję: eu
+2026-11-23 20:30:08 | DEBUG    | ua_ue_trade_mirror_etl.extractors.ukraine_customs:_select_from_filter:64 - Zatwierdzono wartość filtra <Locator frame=<Frame name= url='https://bi.customs.gov.ua/en/trade/import-export'> selector='internal:testid=[data-testid="collapsed-title-Region"s] >> div >> internal:has-text=/^Region$/'>: eu
+2026-11-23 20:30:08 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:select_hs_chapter:46 - Wybieram HS Chapter: 1001
+2026-11-23 20:30:08 | DEBUG    | ua_ue_trade_mirror_etl.extractors.ukraine_customs:_select_from_filter:50 - Otwieram filtr <Locator frame=<Frame name= url='https://bi.customs.gov.ua/en/trade/import-export'> selector='internal:testid=[data-testid="collapsed-title-HS Chapter"s] >> div >> internal:has-text=/^HS Chapter$/'> i wpisuję: 1001
+2026-11-23 20:30:09 | DEBUG    | ua_ue_trade_mirror_etl.extractors.ukraine_customs:_select_from_filter:64 - Zatwierdzono wartość filtra <Locator frame=<Frame name= url='https://bi.customs.gov.ua/en/trade/import-export'> selector='internal:testid=[data-testid="collapsed-title-HS Chapter"s] >> div >> internal:has-text=/^HS Chapter$/'>: 1001
+2026-11-23 20:30:09 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:download:67 - pobieram dane
+2026-11-23 20:30:10 | SUCCESS  | ua_ue_trade_mirror_etl.extractors.ukraine_customs:download:76 - Zapisano pobrane dane: data/raw/ab9a451d-65cf-4e67-995e-d92eabf6ed96.xlsx
+2026-11-23 20:30:10 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:14 - Parsuje plik Excel: data/raw/ab9a451d-65cf-4e67-995e-d92eabf6ed96.xlsx (year=2025, hs_chapter=1001)
+2026-11-23 20:30:10 | DEBUG    | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:16 - Wczytano 249 wierszy
+2026-11-23 20:30:10 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:24 - Pominięto 2 wierszy bez kodu ISO: ['  Unspecified', '-']
+2026-11-23 20:30:10 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:54 - Zwalidowano 247 rekordów z data/raw/ab9a451d-65cf-4e67-995e-d92eabf6ed96.xlsx
+2026-11-23 20:30:10 | SUCCESS  | ua_ue_trade_mirror_etl.storage:df_to_csv:20 - zapisano df do data/output/ua_customs_clean.csv
+2026-11-23 20:30:10 | INFO     | ua_ue_trade_mirror_etl.extractors.eurostat_comext:fetch_trade_with_ukraine:37 - Querying Eurostat Comext: https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/ds-045409/M.PL.UA.1001.1+2.VALUE_IN_EUROS (2025-01..2025-12)
+2026-11-23 20:30:10 | ERROR    | __main__:<module>:54 - An error has been caught in function '<module>', process 'MainProcess' (51291), thread 'MainThread' (128098710798656):
+Traceback (most recent call last):
+
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+
+> File "/home/maksk/testowanie/src/ua_ue_trade_mirror_etl/pipeline.py", line 54, in <module>
+    run_pipeline()
+    └ <function run_pipeline at 0x74812a2013a0>
+
+  File "/home/maksk/testowanie/src/ua_ue_trade_mirror_etl/pipeline.py", line 42, in run_pipeline
+    eu_records = [eurostat.fetch_trade_with_ukraine(iso2) for iso2 in settings.eu_countries]
+                  │        │                                          │        └ ['PL', 'DE', 'RO', 'HU', 'SK', 'ES', 'IT', 'NL', 'FR']
+                  │        │                                          └ Settings(target_year=2025, target_currency='usd', target_region='eu', target_hs_chapter='1001', eu_countries=['PL', 'DE', 'RO...
+                  │        └ <function EurostatComextClient.fetch_trade_with_ukraine at 0x74812a200540>
+                  └ <ua_ue_trade_mirror_etl.extractors.eurostat_comext.EurostatComextClient object at 0x748129749280>
+
+  File "/home/maksk/testowanie/src/ua_ue_trade_mirror_etl/extractors/eurostat_comext.py", line 40, in fetch_trade_with_ukraine
+    response.raise_for_status()
+    │        └ <function Response.raise_for_status at 0x74814bfd89a0>
+    └ <Response [500 Internal Server Error]>
+
+  File "/home/maksk/testowanie/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+          │               │                │                 └ <Response [500 Internal Server Error]>
+          │               │                └ <Request('GET', 'https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/ds-045409/M.PL.UA.1001.1+2.VALUE_IN_EUR...
+          │               └ "Server error '500 Internal Server Error' for url 'https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/ds-04...
+          └ <class 'httpx.HTTPStatusError'>
+
+httpx.HTTPStatusError: Server error '500 Internal Server Error' for url 'https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/ds-045409/M.PL.UA.1001.1+2.VALUE_IN_EUROS?startPeriod=2025-01&endPeriod=2025-12&format=SDMX-CSV'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+2026-11-23 20:45:07 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:14 - Parsuje plik Excel: /home/maksk/testowanie/tests/fixtures/sample_ua_customs.xlsx (year=2025, hs_chapter=1001)
+2026-11-23 20:45:07 | DEBUG    | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:16 - Wczytano 249 wierszy
+2026-11-23 20:45:07 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:24 - Pominięto 2 wierszy bez kodu ISO: ['  Unspecified', '-']
+2026-11-23 20:45:07 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:54 - Zwalidowano 247 rekordów z /home/maksk/testowanie/tests/fixtures/sample_ua_customs.xlsx
+2026-11-23 20:45:08 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:14 - Parsuje plik Excel: /tmp/pytest-of-maksk/pytest-0/test_parse_skips_non_iso_and_i0/dirty.xlsx (year=2025, hs_chapter=1001)
+2026-11-23 20:45:08 | DEBUG    | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:16 - Wczytano 4 wierszy
+2026-11-23 20:45:08 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:24 - Pominięto 2 wierszy bez kodu ISO: ['-', 'Unspecified']
+2026-11-23 20:45:08 | WARNING  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:52 - Skipping invalid row (DE Germany): 1 validation error for UAcustomsRecord
+  Value error, total_value_usd != export_usd + import_usd [type=value_error, input_value={'partner_iso2': 'DE', 'p...d': 5, 'balance_usd': 5}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.14/v/value_error
+2026-11-23 20:45:08 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:54 - Zwalidowano 1 rekordów z /tmp/pytest-of-maksk/pytest-0/test_parse_skips_non_iso_and_i0/dirty.xlsx
+2026-11-23 20:45:08 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:14 - Parsuje plik Excel: /tmp/pytest-of-maksk/pytest-0/test_parse_cleans_whitespace_a0/formatted.xlsx (year=2025, hs_chapter=1001)
+2026-11-23 20:45:08 | DEBUG    | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:16 - Wczytano 1 wierszy
+2026-11-23 20:45:08 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:54 - Zwalidowano 1 rekordów z /tmp/pytest-of-maksk/pytest-0/test_parse_cleans_whitespace_a0/formatted.xlsx
+2026-11-23 20:45:08 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:open:28 - Otwieram stronę: https://bi.customs.gov.ua/en/trade/import-export
+2026-11-23 20:45:08 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:download:67 - pobieram dane
+2026-11-23 20:45:08 | SUCCESS  | ua_ue_trade_mirror_etl.extractors.ukraine_customs:download:76 - Zapisano pobrane dane: /tmp/pytest-of-maksk/pytest-0/test_ua_customs_download_saves0/report.xlsx
+2026-11-23 20:45:08 | INFO     | ua_ue_trade_mirror_etl.extractors.eurostat_comext:fetch_trade_with_ukraine:37 - Querying Eurostat Comext: https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/ds-045409/M.PL.UA.1001.1+2.VALUE_IN_EUROS/ (2025-01..2025-12)
+2026-11-23 20:45:08 | SUCCESS  | ua_ue_trade_mirror_etl.extractors.eurostat_comext:fetch_trade_with_ukraine:54 - Eurostat pl<-UA (HS 1001, 2025): import=165.00 USD, export=220.00 USD (rate: 1.1)
+2026-11-23 20:45:08 | INFO     | ua_ue_trade_mirror_etl.extractors.eurostat_comext:fetch_trade_with_ukraine:37 - Querying Eurostat Comext: https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/ds-045409/M.PL.UA.1001.1+2.VALUE_IN_EUROS/ (2025-01..2025-12)
+2026-11-23 20:45:08 | INFO     | ua_ue_trade_mirror_etl.transform.reconciler:reconcile_trade_mirror:37 - Zestawiono 2 krajów, zgodnych w obie strony: 1
+2026-11-23 20:45:08 | WARNING  | ua_ue_trade_mirror_etl.transform.reconciler:reconcile_trade_mirror:13 - Brak danych do zestawienia w reconcilerze
+2026-11-23 20:45:08 | INFO     | ua_ue_trade_mirror_etl.transform.reconciler:reconcile_trade_mirror:37 - Zestawiono 1 krajów, zgodnych w obie strony: 1
+2026-11-23 20:50:04 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:14 - Parsuje plik Excel: /home/maksk/testowanie/tests/fixtures/sample_ua_customs.xlsx (year=2025, hs_chapter=1001)
+2026-11-23 20:50:04 | DEBUG    | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:16 - Wczytano 249 wierszy
+2026-11-23 20:50:04 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:24 - Pominięto 2 wierszy bez kodu ISO: ['  Unspecified', '-']
+2026-11-23 20:50:04 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:54 - Zwalidowano 247 rekordów z /home/maksk/testowanie/tests/fixtures/sample_ua_customs.xlsx
+2026-11-23 20:50:04 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:14 - Parsuje plik Excel: /tmp/pytest-of-maksk/pytest-1/test_parse_skips_non_iso_and_i0/dirty.xlsx (year=2025, hs_chapter=1001)
+2026-11-23 20:50:04 | DEBUG    | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:16 - Wczytano 4 wierszy
+2026-11-23 20:50:04 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:24 - Pominięto 2 wierszy bez kodu ISO: ['-', 'Unspecified']
+2026-11-23 20:50:04 | WARNING  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:52 - Skipping invalid row (DE Germany): 1 validation error for UAcustomsRecord
+  Value error, total_value_usd != export_usd + import_usd [type=value_error, input_value={'partner_iso2': 'DE', 'p...d': 5, 'balance_usd': 5}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.14/v/value_error
+2026-11-23 20:50:04 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:54 - Zwalidowano 1 rekordów z /tmp/pytest-of-maksk/pytest-1/test_parse_skips_non_iso_and_i0/dirty.xlsx
+2026-11-23 20:50:04 | INFO     | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:14 - Parsuje plik Excel: /tmp/pytest-of-maksk/pytest-1/test_parse_cleans_whitespace_a0/formatted.xlsx (year=2025, hs_chapter=1001)
+2026-11-23 20:50:04 | DEBUG    | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:16 - Wczytano 1 wierszy
+2026-11-23 20:50:04 | SUCCESS  | ua_ue_trade_mirror_etl.transform.cleaner:parse_ua_customs_excel:54 - Zwalidowano 1 rekordów z /tmp/pytest-of-maksk/pytest-1/test_parse_cleans_whitespace_a0/formatted.xlsx
+2026-11-23 20:50:04 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:open:28 - Otwieram stronę: https://bi.customs.gov.ua/en/trade/import-export
+2026-11-23 20:50:04 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:download:67 - pobieram dane
+2026-11-23 20:50:04 | SUCCESS  | ua_ue_trade_mirror_etl.extractors.ukraine_customs:download:76 - Zapisano pobrane dane: /tmp/pytest-of-maksk/pytest-1/test_ua_customs_download_saves0/report.xlsx
+2026-11-23 20:50:04 | INFO     | ua_ue_trade_mirror_etl.extractors.eurostat_comext:fetch_trade_with_ukraine:37 - Querying Eurostat Comext: https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/ds-045409/M.PL.UA.1001.1+2.VALUE_IN_EUROS/ (2025-01..2025-12)
+2026-11-23 20:50:04 | SUCCESS  | ua_ue_trade_mirror_etl.extractors.eurostat_comext:fetch_trade_with_ukraine:54 - Eurostat pl<-UA (HS 1001, 2025): import=165.00 USD, export=220.00 USD (rate: 1.1)
+2026-11-23 20:50:04 | INFO     | ua_ue_trade_mirror_etl.extractors.eurostat_comext:fetch_trade_with_ukraine:37 - Querying Eurostat Comext: https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/ds-045409/M.PL.UA.1001.1+2.VALUE_IN_EUROS/ (2025-01..2025-12)
+2026-11-23 20:50:05 | INFO     | ua_ue_trade_mirror_etl.transform.reconciler:reconcile_trade_mirror:37 - Zestawiono 2 krajów, zgodnych w obie strony: 1
+2026-11-23 20:50:05 | WARNING  | ua_ue_trade_mirror_etl.transform.reconciler:reconcile_trade_mirror:13 - Brak danych do zestawienia w reconcilerze
+2026-11-23 20:50:05 | INFO     | ua_ue_trade_mirror_etl.transform.reconciler:reconcile_trade_mirror:37 - Zestawiono 1 krajów, zgodnych w obie strony: 1
