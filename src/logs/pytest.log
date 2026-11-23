@@ -1,0 +1,60 @@
+2026-11-23 20:23:54 | INFO     | __main__:run_pipeline:33 - Startuje pipeline UA-UE trade mirror ETL
+2026-11-23 20:23:55 | INFO     | ua_ue_trade_mirror_etl.extractors.ukraine_customs:open:28 - Otwieram stronę: https://bi.customs.gov.ua/en/trade/import-export
+2026-11-23 20:24:16 | ERROR    | __main__:<module>:54 - An error has been caught in function '<module>', process 'MainProcess' (49391), thread 'MainThread' (127135762813248):
+Traceback (most recent call last):
+
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+
+> File "/home/maksk/testowanie/src/ua_ue_trade_mirror_etl/pipeline.py", line 54, in <module>
+    run_pipeline()
+    └ <function run_pipeline at 0x73a0f5f451c0>
+
+  File "/home/maksk/testowanie/src/ua_ue_trade_mirror_etl/pipeline.py", line 36, in run_pipeline
+    raw_xlsx_path = extract_ua_customs()
+                    └ <function extract_ua_customs at 0x73a119b80900>
+
+  File "/home/maksk/testowanie/src/ua_ue_trade_mirror_etl/pipeline.py", line 19, in extract_ua_customs
+    customs.open()
+    │       └ <function UA_customs_Page.open at 0x73a0f5f445e0>
+    └ <ua_ue_trade_mirror_etl.extractors.ukraine_customs.UA_customs_Page object at 0x73a0f55ec9e0>
+
+  File "/home/maksk/testowanie/src/ua_ue_trade_mirror_etl/extractors/ukraine_customs.py", line 30, in open
+    expect(self.main_table).to_be_visible(timeout=self.DEFAULT_TIMEOUTS_MS)
+    │      │    │                                 │    └ 20000
+    │      │    │                                 └ <ua_ue_trade_mirror_etl.extractors.ukraine_customs.UA_customs_Page object at 0x73a0f55ec9e0>
+    │      │    └ <Locator frame=<Frame name= url='https://bi.customs.gov.ua/en/trade/import-export'> selector='internal:role=application[name=...
+    │      └ <ua_ue_trade_mirror_etl.extractors.ukraine_customs.UA_customs_Page object at 0x73a0f55ec9e0>
+    └ <playwright.sync_api.Expect object at 0x73a119a4a510>
+
+  File "/home/maksk/testowanie/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 14844, in to_be_visible
+    self._sync(
+    │    └ <function SyncBase._sync at 0x73a118868c20>
+    └ <playwright._impl.assertions.LocatorAssertions object at 0x73a0f7762720>
+  File "/home/maksk/testowanie/.venv/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 124, in _sync
+    return task.result()
+           │    └ <method 'result' of '_asyncio.Task' objects>
+           └ <Task finished name='Task-9' coro=<LocatorAssertions.to_be_visible() done, defined at /home/maksk/testowanie/.venv/lib/python...
+  File "/home/maksk/testowanie/.venv/lib/python3.12/site-packages/playwright/_impl/assertions.py", line 869, in to_be_visible
+    await self._expect_impl(
+          │    └ <function AssertionsBase._expect_impl at 0x73a11881d3a0>
+          └ <playwright._impl.assertions.LocatorAssertions object at 0x73a0f7762720>
+  File "/home/maksk/testowanie/.venv/lib/python3.12/site-packages/playwright/_impl/assertions.py", line 122, in _expect_impl
+    _record_soft_or_raise(
+    └ <function _record_soft_or_raise at 0x73a119ad9260>
+  File "/home/maksk/testowanie/.venv/lib/python3.12/site-packages/playwright/_impl/_assertions.py", line 50, in _record_soft_or_raise
+    raise error
+          └ AssertionError('Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect "to_b...
+
+AssertionError: Locator expected to be visible
+Actual value: None
+Error: element(s) not found 
+Call log:
+  - Expect "to_be_visible" get_by_role("application", name="Таблиця   Country") with timeout 20000ms
+  - waiting for get_by_role("application", name="Таблиця   Country")
+
+Aria snapshot:
+- heading "Access Denied" [level=1]
+- text: You don't have permission to access "http://bi.customs.gov.ua/en/trade/import-export" on this server.
+- paragraph: "Reference #18.840c4017.1795461836.a7a4e229"
+- paragraph: https://errors.edgesuite.net/18.840c4017.1795461836.a7a4e229

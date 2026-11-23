@@ -10,7 +10,7 @@ from ua_ue_trade_mirror_etl.transform.reconciler import reconcile_trade_mirror
 
 
 def extract_ua_customs() -> Path:
-    """Launch Playwright, filter UA Customs dashboard, and download raw Excel."""
+    #odpala playwright wedlug configu
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=settings.headless)
         page = browser.new_page()
@@ -29,19 +29,20 @@ def extract_ua_customs() -> Path:
 
 @logger.catch(reraise=True)
 def run_pipeline(raw_xlsx_path: Path | None = None) -> Path:
-    """Run the full UA-UE trade mirror ETL pipeline."""
+    #jak nie ma xlxsa to scrapuje
     logger.info("Startuje pipeline UA-UE trade mirror ETL")
 
     if raw_xlsx_path is None:
         raw_xlsx_path = extract_ua_customs()
-
+    #parsowanie xlxsa
     ua_df = parse_ua_customs_excel(raw_xlsx_path)
     df_to_csv(ua_df, "ua_customs_clean.csv")
-
+    #laczy z api eurostatu i pobiera 
     eurostat = EurostatComextClient()
     eu_records = [eurostat.fetch_trade_with_ukraine(iso2) for iso2 in settings.eu_countries]
-
+    #porownuje dane z UA i EU w obie strony import/export
     reconciled_df = reconcile_trade_mirror(ua_df, eu_records)
+    #zapisuje polaczone pliki csv
     output_path = df_to_csv(reconciled_df, "trade_mirror.csv")
     save_anomalies(reconciled_df)
 
