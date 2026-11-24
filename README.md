@@ -17,13 +17,16 @@ An object-oriented ETL pipeline in Python that collects official foreign trade s
    - [`logger.py`](src/ua_ue_trade_mirror_etl/logger.py) — structured logging and log rotation via **loguru** for diagnosing network failures, DOM changes, and validation errors.
    - [`generate_chart.py`](scripts/generate_chart.py) — generates publication-ready comparison charts in **matplotlib** for qualitative and economic analysis.
 
-## Analytical Findings (`HS 1001` — Wheat, 2024)
+## Analytical Findings (`HS 1001` — Wheat, 2025)
 
-![UA-EU Wheat Trade Mirror Chart](data/output/trade_mirror_chart.png)
+![UA-EU Wheat Export Mirror Chart](data/output/trade_mirror_chart.png)
 
-- **Spain (`ES`: $980M UA reported vs. $1,109M EU reported, `11.6%` gap) & Germany (`DE`: $21.5M vs. $23.3M, `7.6%` gap):** High mirror consistency; the ~8–12% positive spread on the EU side reflects standard **FOB vs. CIF** valuation differences (freight and insurance costs included in EU import figures).
-- **Poland (`PL`: $0.36M), Hungary (`HU`: $0M), Slovakia (`SK`: $0M):** Near-zero EU-reported imports reflect national import bans on Ukrainian grain (transit shipments under customs supervision are excluded from national import statistics).
-- **Netherlands (`NL`):** Significantly higher EU-reported imports illustrate the classic **Rotterdam effect** (quasi-transit goods cleared through Dutch customs upon entering the EU single market before onward distribution).
+![UA-EU Wheat Import Mirror Chart](data/output/trade_mirror_import_chart.png)
+
+- **Lithuania (`LT`: `$0.59M` UA vs. `$0.57M` EU, `2.6%` gap) & Germany (`DE`: `$4.85M` vs. `$5.32M`, `9.0%` export gap; `$0.45M` vs. `$0.45M`, `0.5%` import gap):** High bidirectional mirror consistency (`matches_all = True`).
+- **Spain (`ES`: `$251.6M` UA vs. `$308.0M` EU, `18.3%` gap) & Italy (`IT`: `$109.0M` vs. `$135.8M`, `19.7%` gap):** Consistent ~18–20% positive spread on the EU side, reflecting standard **FOB vs. CIF** valuation differences (maritime freight and insurance included in EU import figures).
+- **Poland (`PL`: `$0.74M` EU import), Hungary (`HU`: `$0M`), Slovakia (`SK`: `$0` trade):** Near-zero EU-reported imports reflect ongoing national import bans on Ukrainian wheat (transit shipments under customs supervision are excluded from national import statistics).
+- **Netherlands (`NL`: `$1.68M` UA vs. `$9.27M` EU, `81.8%` gap):** Significantly higher EU-reported imports illustrate the classic **Rotterdam effect** (quasi-transit goods cleared through Dutch ports upon entering the EU single market before onward distribution).
 
 ## Project Structure
 
