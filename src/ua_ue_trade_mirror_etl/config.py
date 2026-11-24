@@ -19,7 +19,7 @@ class Settings(BaseModel):
         default_factory=lambda: _parse_csv_env("EU_COUNTRIES", "PL,DE,LT,HU,SK,ES,CZ,IT,NL,FR")
     )
 
-    # Źródła danych i limity czasu
+    # Źródła danych 
     ua_customs_url: str = Field(
         default=os.getenv("UA_CUSTOMS_URL", "https://bi.customs.gov.ua/en/trade/import-export")
     )
