@@ -6,7 +6,7 @@ An object-oriented ETL pipeline in Python that collects official foreign trade s
 
 1. **Extract (Automated Web Scraping & API Ingestion):**
    - [`ukraine_customs.py`](src/ua_ue_trade_mirror_etl/extractors/ukraine_customs.py) — **Playwright** scraper built using the **Page Object Model (POM)** pattern to navigate `bi.customs.gov.ua`, apply dynamic filters, and download raw `.xlsx` trade reports with explicit timeout and error handling.
-   - [`eurostat_comext.py`](src/ua_ue_trade_mirror_etl/extractors/eurostat_comext.py) — **httpx** client fetching monthly SDMX-CSV series from the Eurostat Comext API (`FLOW 1+2`) and converting EUR values to USD using average annual exchange rates from the **NBP API**.
+   - [`eurostat_comext.py`](src/ua_ue_trade_mirror_etl/extractors/eurostat_comext.py) — **httpx** client fetching monthly SDMX-CSV series from the Eurostat Comext API (`FLOW 1+2`) and converting EUR values to USD using current rate from **NBP API**.
 
 2. **Transform & Validate (Irregular File Parsing & Schema Enforcement):**
    - [`cleaner.py`](src/ua_ue_trade_mirror_etl/transform/cleaner.py) & [`models.py`](src/ua_ue_trade_mirror_etl/models.py) — parses irregular, multi-header `.xlsx` customs exports (`pandas` + `openpyxl`), normalizes country/commodity codes, and enforces strict type and mathematical consistency checks (`Total ≈ Export + Import`, `Balance ≈ Export - Import`) via **Pydantic**.
