@@ -19,7 +19,7 @@ An object-oriented ETL pipeline in Python that collects official foreign trade s
 
 ## Analytical Findings (`HS 1001` — Wheat, 2024)
 
-![UA-EU Wheat Trade Mirror Chart](docs/trade_mirror_chart.png)
+![UA-EU Wheat Trade Mirror Chart](data/output/trade_mirror_chart.png)
 
 - **Spain (`ES`: $980M UA reported vs. $1,109M EU reported, `11.6%` gap) & Germany (`DE`: $21.5M vs. $23.3M, `7.6%` gap):** High mirror consistency; the ~8–12% positive spread on the EU side reflects standard **FOB vs. CIF** valuation differences (freight and insurance costs included in EU import figures).
 - **Poland (`PL`: $0.36M), Hungary (`HU`: $0M), Slovakia (`SK`: $0M):** Near-zero EU-reported imports reflect national import bans on Ukrainian grain (transit shipments under customs supervision are excluded from national import statistics).
