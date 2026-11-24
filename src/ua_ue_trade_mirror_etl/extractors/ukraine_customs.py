@@ -13,13 +13,19 @@ class UA_customs_Page:
     def __init__(self, page: Page):
         self.page = page
 
-        self.main_table = page.get_by_role("application", name="Таблиця \xa0 Country")  # nie przetłumaczony ARIA
+        self.main_table = page.get_by_role("grid").first
+        self.no_selections_banner = page.get_by_text(
+            re.compile(r"No selections applied|Вибірки не застосовані|Выборки не применены")
+        )
         self.Year = page.get_by_test_id("collapsed-title-Year").locator("div").filter(has_text=re.compile(r"^Year$"))
         self.Currency = page.get_by_test_id("collapsed-title-Currency").locator("div").filter(has_text=re.compile(r"^Currency$"))
         self.Region = page.get_by_test_id("collapsed-title-Region").locator("div").filter(has_text=re.compile(r"^Region$"))
         self.HS_Chapter = page.get_by_test_id("collapsed-title-HS Chapter").locator("div").filter(has_text=re.compile(r"^HS Chapter$"))
 
-        self.search_filter_region = page.get_by_role("region", name="Фильтр результатов поиска")  # nie przetłumaczony ARIA
+        self.search_filter_region = page.get_by_role(
+            "region",
+            name=re.compile(r"Search Results Filter|Фильтр результатов поиска|Фільтр результатів пошуку"),
+        )
         self.search_input = page.get_by_test_id("search-input-field")
         self.confirm_button = page.get_by_test_id("actions-toolbar-confirm")
         self.download_button = page.get_by_role("button", name="Download")
@@ -46,6 +52,14 @@ class UA_customs_Page:
         logger.info(f"Wybieram HS Chapter: {hs_chapter}")
         self._select_from_filter(self.HS_Chapter, hs_chapter)
 
+    def _wait_for_recalculation(self) -> None:
+        #czekaj az silnik BI nalozy filtry
+        expect(self.search_filter_region).to_be_hidden(timeout=self.DEFAULT_TIMEOUTS_MS)
+        expect(self.no_selections_banner).to_be_hidden(timeout=self.DEFAULT_TIMEOUTS_MS)
+        expect(self.page.locator('[aria-busy="true"]')).to_have_count(0, timeout=self.DEFAULT_TIMEOUTS_MS)
+        expect(self.main_table).to_be_visible(timeout=self.DEFAULT_TIMEOUTS_MS)
+        self.page.wait_for_timeout(1000)
+
     def _select_from_filter(self, filter_locator: Locator, value: str):
         logger.debug(f"Otwieram filtr {filter_locator} i wpisuję: {value}")
         filter_locator.click()
@@ -59,12 +73,16 @@ class UA_customs_Page:
         expect(matching_row).to_be_visible(timeout=self.DEFAULT_TIMEOUTS_MS)
 
         self.search_input.press("Enter")
+        expect(self.search_filter_region.locator('[aria-selected="true"]').first).to_be_visible(
+            timeout=self.DEFAULT_TIMEOUTS_MS
+        )
         self.confirm_button.click()
-        expect(self.main_table).to_be_visible(timeout=self.DEFAULT_TIMEOUTS_MS)
+        self._wait_for_recalculation()
         logger.debug(f"Zatwierdzono wartość filtra {filter_locator}: {value}")
 
     def download(self, folder: str | Path = settings.raw_dir) -> Path:
         logger.info("pobieram dane")
+        self._wait_for_recalculation()
         Path(folder).mkdir(parents=True, exist_ok=True)
         with self.page.expect_download(timeout=self.DOWNLOAD_TIMEOUT_MS) as download_info:
             with self.page.expect_popup(timeout=self.DOWNLOAD_TIMEOUT_MS) as popup_info:

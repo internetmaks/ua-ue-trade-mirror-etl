@@ -1,3 +1,4 @@
+import importlib.util
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 from ua_ue_trade_mirror_etl.config import settings
@@ -45,6 +46,14 @@ def run_pipeline(raw_xlsx_path: Path | None = None) -> Path:
     #zapisuje polaczone pliki csv
     output_path = df_to_csv(reconciled_df, "trade_mirror.csv")
     save_anomalies(reconciled_df)
+
+    chart_script = Path(__file__).resolve().parents[2] / "scripts" / "generate_chart.py"
+    if chart_script.exists():
+        spec = importlib.util.spec_from_file_location("generate_chart", chart_script)
+        if spec and spec.loader:
+            chart_mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(chart_mod)
+            chart_mod.generate_trade_mirror_chart(csv_path=output_path)
 
     logger.success(f"Pipeline zakończony: {output_path}")
     return output_path

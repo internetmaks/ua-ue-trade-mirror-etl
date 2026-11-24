@@ -24,7 +24,8 @@ def test_ua_customs_download_saves_to_target_dir(tmp_path: Path) -> None:
     mock_page.expect_download.return_value.__enter__.return_value.value = mock_download
 
     customs = UA_customs_Page(mock_page)
-    saved_path = customs.download(folder=tmp_path)
+    with patch("ua_ue_trade_mirror_etl.extractors.ukraine_customs.expect"):
+        saved_path = customs.download(folder=tmp_path)
 
     assert saved_path == tmp_path / "report.xlsx"
     mock_download.save_as.assert_called_once_with(tmp_path / "report.xlsx")
