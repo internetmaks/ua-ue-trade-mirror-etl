@@ -5,3 +5,4 @@ tests/downloads
 tests/logs
 /logs
 .vscode/
+/data
