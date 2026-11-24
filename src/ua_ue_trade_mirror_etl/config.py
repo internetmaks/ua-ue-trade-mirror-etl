@@ -11,12 +11,12 @@ def _parse_csv_env(name: str, default: str) -> list[str]:
 
 class Settings(BaseModel):
     # domyslne parametry wspólne dla UA Customs i Eurostat
-    target_year: int = Field(default=int(os.getenv("TARGET_YEAR", "2024")))
+    target_year: int = Field(default=int(os.getenv("TARGET_YEAR", "2025")))
     target_currency: str = Field(default=os.getenv("TARGET_CURRENCY", "usd"))
     target_region: str = Field(default=os.getenv("TARGET_REGION", "eu"))
     target_hs_chapter: str = Field(default=os.getenv("TARGET_HS_CHAPTER", "1001"))
     eu_countries: list[str] = Field(
-        default_factory=lambda: _parse_csv_env("EU_COUNTRIES", "PL,DE,RO,HU,SK,ES,IT,NL,FR")
+        default_factory=lambda: _parse_csv_env("EU_COUNTRIES", "PL,DE,LT,HU,SK,ES,CZ,IT,NL,FR")
     )
 
     # Źródła danych i limity czasu
