@@ -8,16 +8,6 @@ __pycache__/
 tests/downloads/
 tests/logs/
 
-.venv/
-__pycache__/
-.pytest_cache/
-.vscode/
-.env
-*.pyc
-/logs/
-tests/downloads/
-tests/logs/
-
 /data/*
 !/data/output/
 /data/output/*
