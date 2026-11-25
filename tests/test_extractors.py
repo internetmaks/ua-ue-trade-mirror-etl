@@ -1,6 +1,6 @@
 from pathlib import Path
 import pytest
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import Page
 from ua_ue_trade_mirror_etl.config import settings
 from ua_ue_trade_mirror_etl.extractors.eurostat_comext import EurostatComextClient
 from ua_ue_trade_mirror_etl.extractors.ukraine_customs import UA_customs_Page
@@ -26,21 +26,14 @@ def test_eurostat_fetch_trade_real_api_pl_2025() -> None:
     assert record.export_usd >= 0
 
 
-def test_ua_customs_scraper_downloads_real_xlsx(tmp_path: Path) -> None:
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=settings.headless)
-        page = browser.new_page()
-        try:
-            customs = UA_customs_Page(page)
-            customs.open()
-            customs.select_year(settings.target_year)
-            customs.select_currency(settings.target_currency)
-            customs.select_region(settings.target_region)
-            customs.select_hs_chapter(settings.target_hs_chapter)
-            downloaded = customs.download(folder=tmp_path)
-        finally:
-            page.close()
-            browser.close()
+def test_ua_customs_scraper_downloads_real_xlsx(page: Page, tmp_path: Path) -> None:
+    customs = UA_customs_Page(page)
+    customs.open()
+    customs.select_year(settings.target_year)
+    customs.select_currency(settings.target_currency)
+    customs.select_region(settings.target_region)
+    customs.select_hs_chapter(settings.target_hs_chapter)
+    downloaded = customs.download(folder=tmp_path)
 
     assert downloaded.exists()
     assert downloaded.suffix == ".xlsx"
