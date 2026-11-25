@@ -40,6 +40,6 @@ An object-oriented ETL pipeline in Python that collects official foreign trade s
 │   ├── storage.py                 # CSV & anomaly report exporter
 │   └── pipeline.py                # End-to-end ETL orchestration
 ├── scripts/generate_chart.py      # Comparison charts (matplotlib)
-├── tests/                         # Offline unit tests (pytest + mocks + .xlsx fixtures)
+├── tests/                         # Offline unit tests (pytest)
 ├── pytest.ini
 └── requirements.txt
